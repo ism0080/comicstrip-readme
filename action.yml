@@ -1,6 +1,6 @@
 name: "Comic Strip Readme"
 author: Isaac Mackle (ism0080)
-description: "Add the dilbert and xkcd comic strips to your Readme"
+description: "Add the xkcd comic strip to your Readme"
 
 inputs:
   GH_TOKEN:
@@ -16,11 +16,6 @@ inputs:
   COMMIT_MESSAGE:
     description: "Add a commit message of your choice"
     default: "Updated readme comic strip"
-    required: false
-
-  SHOW_DILBERT:
-    description: "Show the dilbert comic"
-    default: false
     required: false
 
   SHOW_XKCD:

@@ -15,7 +15,7 @@ class TestMain(unittest.TestCase):
             os.environ["INPUT_SHOW_DILBERT"] = env
             self.assertEqual(get_dilbert(), result)
         test('false', "")
-                
+
     def test_xkcd(self):
         """Tests for downloading xkcd comic"""
         def test(env: str, result: str):

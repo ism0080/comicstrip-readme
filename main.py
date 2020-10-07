@@ -8,8 +8,6 @@ import base64
 import sys
 import requests
 from github import Github, GithubException
-from bs4 import BeautifulSoup
-from datetime import datetime
 
 START_COMMENT = "<!--START_SECTION:comicstrip-->"
 END_COMMENT = "<!--END_SECTION:comicstrip-->"
@@ -19,7 +17,6 @@ ghtoken = os.getenv("INPUT_GH_TOKEN")
 repository = os.getenv("INPUT_REPOSITORY")
 commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
 xkcd = os.getenv("INPUT_SHOW_XKCD")
-dilbert = os.getenv("INPUT_SHOW_DILBERT")
 
 
 def get_xkcd() -> str:
@@ -33,37 +30,11 @@ def get_xkcd() -> str:
     return ""
 
 
-def get_dilbert() -> str:
-    """Get image url for comic"""
-    if dilbert == 'true':
-        date = get_date()
-        r = requests.get(f"https://dilbert.com/strip/{date}")
-        s = BeautifulSoup(r.text, "html.parser")
-        tag = s.find("meta", attrs={"property": "og:image"})
-        img = tag.attrs['content']
-
-        return f'<a href="https://dilbert.com/strip/{date}">\n <img src="{img}" />\n</a>'
-
-    return ""
-
-
-def get_date() -> str:
-    """Get today's date in format YYYY/MM/DD"""
-    return datetime.today().strftime('%Y-%m-%d')
-
-
 def build_comicstrip() -> str:
-    comicstrip = ""
-    dilbert_comic = get_dilbert()
     xkcd_comic = get_xkcd()
-    if dilbert_comic and xkcd_comic:
-        comicstrip = f'<p align="center">\n {dilbert_comic}\n {xkcd_comic}\n</p>'
-    if dilbert_comic and not xkcd_comic:
-        comicstrip = f'<p align="center">\n {dilbert_comic}\n</p>'
-    if xkcd_comic and not dilbert_comic:
-        comicstrip = f'<p align="center">\n {xkcd_comic}\n</p>'
-    if not (dilbert_comic or xkcd_comic):
-        return comicstrip
+    comicstrip = f'<p align="center">\n {xkcd_comic}\n</p>'
+    if not xkcd_comic:
+        return ""
 
     return comicstrip
 
