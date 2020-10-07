@@ -40,7 +40,7 @@ jobs:
         name: Update README with Comic Strip
         runs-on: ubuntu-latest
         steps:
-            - uses: ism0080/comicstrip-readme@master
+            - uses: ism0080/comicstrip-readme@v1.2
               with:
                   SHOW_XKCD: true
 ```
@@ -79,7 +79,7 @@ jobs:
         name: Update README with Comic Strip
         runs-on: ubuntu-latest
         steps:
-            - uses: ism0080/comicstrip-readme@master
+            - uses: ism0080/comicstrip-readme@v1.2
               with:
                   SHOW_XKCD: true
                   GH_TOKEN: ${{ secrets.GH_TOKEN }}
