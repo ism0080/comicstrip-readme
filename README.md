@@ -2,7 +2,6 @@
 
 This GitHub Workflow updates your readme with the provided comic strips daily. The current comics available are:
 
--   [Dilbert](https://dilbert.com/)
 -   [XKCD](https://xkcd.com/)
 
 ## Update your README
@@ -33,8 +32,8 @@ name: Comic Strip Readme
 on:
     workflow_dispatch:
     schedule:
-        # Runs at 8am UTC
-        - cron: "0 8 * * *"
+        # Runs at 8am UTC every Monday, Wednesday, Friday
+        - cron: "0 8 * * 1,3,5"
 
 jobs:
     update-readme:
@@ -43,11 +42,10 @@ jobs:
         steps:
             - uses: ism0080/comicstrip-readme@master
               with:
-                  SHOW_DILBERT: true
                   SHOW_XKCD: true
 ```
 
-This will add the Dilbert and XKCD comics to your `README.md` at 8am UTC everyday
+This will add the XKCD comics to your `README.md` at 8am UTC every Monday, Wednesday and Friday
 
 3. Add a comment to your `README.md` like this:
 
@@ -73,8 +71,8 @@ name: Comic Strip Readme
 
 on:
     schedule:
-        # Runs at 12am UTC
-        - cron: "0 8 * * *"
+        # Runs at 8am UTC every Monday, Wednesday, Friday
+        - cron: "0 8 * * 1,3,5"
 
 jobs:
     update-readme:
@@ -83,7 +81,6 @@ jobs:
         steps:
             - uses: ism0080/comicstrip-readme@master
               with:
-                  SHOW_DILBERT: true
                   SHOW_XKCD: true
                   GH_TOKEN: ${{ secrets.GH_TOKEN }}
                   REPOSITORY: <username/username> # optional, By default, it will automatically use the repository who's executing the workflow.
@@ -98,6 +95,4 @@ with:
     COMMIT_MESSAGE: Readme updated
 ```
 
-2. If you only want one of the comics, just simply remove the variable from the `with` statement
-
-_*Sometimes the comic may not be updated daily*_
+_*NOTE: Sometimes the comic may not be new at the time of the cron job running*_
