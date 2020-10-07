@@ -1,0 +1,4 @@
+PyGithub
+bs4
+requests
+bs4

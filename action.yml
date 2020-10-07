@@ -1,0 +1,37 @@
+name: "Comic Strip Readme"
+author: Isaac Mackle (ism0080)
+description: "Add the dilbert and xkcd comic strips to your Readme"
+
+inputs:
+  GH_TOKEN:
+    description: "GitHub access token with Repo scope"
+    required: true
+    default: ${{ github.token }}
+
+  Repository:
+    description: "Your GitHub repository"
+    default: ${{ github.repository }}
+    required: false
+
+  COMMIT_MESSAGE:
+    description: "Add a commit message of your choice"
+    default: "Updated readme comic strip"
+    required: false
+
+  SHOW_DILBERT:
+    description: "Show the dilbert comic"
+    default: false
+    required: false
+
+  SHOW_XKCD:
+    description: "Show the xkcd comic"
+    default: false
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
+branding:
+  icon: "layout"
+  color: "purple"
